@@ -1,0 +1,6 @@
+framework module Pods_The_10___George {
+  umbrella header "Pods-The 10 - George-umbrella.h"
+
+  export *
+  module * { export * }
+}
