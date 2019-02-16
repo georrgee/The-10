@@ -25,13 +25,16 @@ class NowPlayingTableViewCell: UITableViewCell {
             overViewLabel.text    = data?.overView
             
             if let id = data?.id {
+                print("the ID in dat", data?.id)
                 NetworkingService.shared.getMoviePoster(movieId: id, success: { [weak self] (url) in
                     self?.posterImageView.download(url: url)
                 }) { (error) in
                     // if not set default image
                 }
+                NetworkingService.shared.getGenre(movieId: id) { (genreName) in
+                    self.genreLabel.text = genreName
+                }
             }
-            
             
             setupUI()
         }

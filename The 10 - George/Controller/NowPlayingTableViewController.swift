@@ -31,6 +31,14 @@ class NowPlayingTableViewController: UITableViewController {
         }, failure: { error in
             // fail action
         })
+        
+//        NetworkingService.shared.getGenreId(movieId: "399579") { (data) in
+//            print("getGenreID called in NowPlayingTableViewController")
+//        }
+//
+//        NetworkingService.shared.getGenreTitle(genreId: "String") { (data) in
+//            print("getGenreTitle called in NowPlayingTableViewController")
+//        }
 
     }
 
