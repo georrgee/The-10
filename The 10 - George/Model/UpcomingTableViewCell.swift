@@ -25,7 +25,7 @@ class UpcomingTableViewCell: UITableViewCell {
             
             if let id = data?.id {
                 
-                NetworkingService.shared.getMoviePoster(movieId: id, success: { [weak self](url) in
+                NetworkingService.shared.getUpcomingMoviePoster(movieId: id, success: { [weak self](url) in
                     self?.posterImageView.download(url: url)
                 }) { (error) in
                     // set default image

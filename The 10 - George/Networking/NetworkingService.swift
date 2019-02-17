@@ -78,6 +78,47 @@ class NetworkingService {
             completion(base_url)
         }
     }
+    // Upcoming API URL getting Poster Path
+    func getUpcomingPosterPath(movieId: String, completion: @escaping (_ posterPath: String?) -> Void) {
+        
+        guard let url = URL(string: upcoming_URL) else { return }
+        
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
+            
+            // if it's not successful exit early in the function
+            // with a completion and a return statements
+            if !response.result.isSuccess {
+                completion(nil)
+                return
+            }
+            
+            guard let response = response.result.value as? [String: AnyObject] else {
+                completion(nil)
+                return
+            }
+            
+            let rawData = JSON(response)
+            let dict = rawData.dictionaryValue
+            
+            guard let results = dict["results"]?.arrayValue else {
+                completion(nil)
+                return
+            }
+            
+            guard let result = results.filter({
+                return $0["id"].stringValue == movieId
+            }).first else {
+                completion(nil)
+                return
+            }
+            
+            //print("Result from getPosterPath: \(result)")
+            
+            let posterPath = result["poster_path"].stringValue
+            
+            completion(posterPath)
+        }
+    }
     
     // getting the poster path from the Movies Now_Playing API URL
     func getPosterPath(movieId: String, completion: @escaping (_ posterPath: String?) -> Void) {
@@ -118,6 +159,22 @@ class NetworkingService {
             let posterPath = result["poster_path"].stringValue
             
             completion(posterPath)
+        }
+    }
+    
+    func getUpcomingMoviePoster(movieId: String, success: @escaping (_ url: String) -> Void, failure: @escaping(_ error: Error) -> Void) {
+        
+        getImageBaseUrl() { stringUrl in
+            guard let stringUrl = stringUrl else {
+                return
+            }
+            self.getUpcomingPosterPath(movieId: movieId) { posterPathString in
+                guard let posterPathString = posterPathString else {
+                    return
+                }
+                let photoUrl = stringUrl + "original" + posterPathString
+                success(photoUrl)
+            }
         }
     }
     
