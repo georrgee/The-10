@@ -10,8 +10,13 @@ import SwiftyJSON
 
 class NetworkingService {
     
+    // MARK: Constant Variables
     static let shared = NetworkingService()
     var genreNameIdPairs: [Int: String] = [:]
+    
+    init() {
+        getGenreTitle {}
+    }
     
     func getNowPlayingMovies(with url: URL, success: @escaping (_ movie: [Movie]) -> Void, failure: @escaping(_ error: Error) -> Void) {
         getMovies(url: now_playingURL, success: success, failure: failure)
@@ -21,24 +26,12 @@ class NetworkingService {
         getMovies(url: upcoming_URL, success: success, failure: failure)
     }
     
-    init() {
-        getGenreTitle {
-            print("Gotten tiles")
-        }
-    }
-    
     private func getMovies(url: String, success: @escaping (_ movie: [Movie]) -> Void, failure: @escaping(_ error: Error) -> Void) {
         guard let api = URL(string: url) else { return }
         Alamofire.request(api, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
 
             if response.result.isSuccess {
-
                 let movieJSON = JSON(response.result.value!)
-                //print("Movie JSON: \(movieJSON)")
-
-            //  let movie = movieJSON["results"].arrayValue
-            //  let results = movie.map({ Movie(rawData: $0) })
-            //  success(results)
 
                 // run a loop i from 1 to 10. add movie at i into result array. and return result.
                 let movie = movieJSON["results"].arrayValue
@@ -46,20 +39,17 @@ class NetworkingService {
                 
                 for i in 0...9 {
                     results.append(Movie(rawData: movie[i]))
-                    //print("Results Count: \(results.count)")
                 }
                 success(results)
             }
         }
     }
     
-    // MARK: Images
-    
-    // getting the image base url from the "Configuration" MovieBaseDB API URL
-    func getImageBaseUrl(completion: @escaping (_ stringUrl: String?) -> Void) {
+    // MARK: Images - Getting them from TheMovieDB API
+    private func getImageBaseUrl(completion: @escaping (_ stringUrl: String?) -> Void) {
         
-        let movieDBAPI = "https://api.themoviedb.org/3/configuration?api_key=\(api_key)"
-        guard let url = URL(string: movieDBAPI) else { return }
+        // getting the image base url from the "Configuration" MovieBaseDB API URL
+        guard let url = URL(string: config_URL) else { return }
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
             
@@ -79,17 +69,15 @@ class NetworkingService {
         }
     }
     // Upcoming API URL getting Poster Path
-    func getUpcomingPosterPath(movieId: String, completion: @escaping (_ posterPath: String?) -> Void) {
+    private func getUpcomingPosterPath(movieId: String, completion: @escaping (_ posterPath: String?) -> Void) {
         
         guard let url = URL(string: upcoming_URL) else { return }
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
             
-            // if it's not successful exit early in the function
-            // with a completion and a return statements
-            if !response.result.isSuccess {
+            if !response.result.isSuccess {   // if it's not successful, exit early in the function
                 completion(nil)
-                return
+                return                        // with a completion and a return statements
             }
             
             guard let response = response.result.value as? [String: AnyObject] else {
@@ -111,9 +99,7 @@ class NetworkingService {
                 completion(nil)
                 return
             }
-            
-            //print("Result from getPosterPath: \(result)")
-            
+
             let posterPath = result["poster_path"].stringValue
             
             completion(posterPath)
@@ -121,14 +107,12 @@ class NetworkingService {
     }
     
     // getting the poster path from the Movies Now_Playing API URL
-    func getPosterPath(movieId: String, completion: @escaping (_ posterPath: String?) -> Void) {
+    private func getNowPlayingPosterPath(movieId: String, completion: @escaping (_ posterPath: String?) -> Void) {
         
         guard let url = URL(string: now_playingURL) else { return }
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
             
-            // if it's not successful exit early in the function
-            // with a completion and a return statements
             if !response.result.isSuccess {
                 completion(nil)
                 return
@@ -153,8 +137,6 @@ class NetworkingService {
                 completion(nil)
                 return
             }
-            
-            //print("Result from getPosterPath: \(result)")
             
             let posterPath = result["poster_path"].stringValue
             
@@ -179,7 +161,7 @@ class NetworkingService {
     }
     
     // Getting both requests and making them into 1 (GCD)
-    func getMoviePoster(movieId: String, success: @escaping (_ url: String) -> Void, failure: @escaping(_ error: Error) -> Void) {
+    func getNowPlayingMoviePoster(movieId: String, success: @escaping (_ url: String) -> Void, failure: @escaping(_ error: Error) -> Void) {
         
         getImageBaseUrl() { stringUrl in
             guard let stringUrl = stringUrl else {
@@ -187,7 +169,7 @@ class NetworkingService {
                 return
             }
             // GCD (Calling both Requests to create the photo URL)
-            self.getPosterPath(movieId: movieId) { posterPathString in
+            self.getNowPlayingPosterPath(movieId: movieId) { posterPathString in
                 guard let posterPathString = posterPathString else {
                     return
                 }
@@ -199,42 +181,32 @@ class NetworkingService {
         }
     }
     
+    // MARK: Genres - Getting them from TheMovieDB API
+    
     func getGenre(movieId: String, success: @escaping (_ title: String) -> Void) {
         getGenreId(movieId: movieId) { genreId in
             guard let genreId = genreId else {
-                print("Abotu to return here")
                 success("")
                 return
             }
             let genreName = self.genreNameIdPairs[genreId] ?? ""
-            print("Genre Name", genreId, genreName, self.genreNameIdPairs)
             success(genreName)
         }
     }
     
-    
-    
-    // MARK: Genres
-    func getGenreId(movieId: String, completion: @escaping(_ genreId: Int?) -> Void) {
-        //results (now playing)
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieId)?api_key=f2448e7d924f45f280a5db37ec9619b1&language=en-US") else { return }
+    private func getGenreId(movieId: String, completion: @escaping(_ genreId: Int?) -> Void) {
+        
+        // movie details API
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieId)?api_key=\(api_key)&language=en-US") else { return }
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
-//            print("REsponse", response)
-//            print("Success", response.result.isSuccess)
-//            print("Key value", response.result.value)
-//            print("JSONified", JSON(response))
-//            print("DictValue", JSON(response).dictionaryValue)
-//            print("Results", JSON(response).dictionaryValue["results"]?.arrayValue)
-            print("Response response", response)
+
             if !response.result.isSuccess {
-                print("Failed here 1")
                 completion(nil)
                 return
             }
             
             guard let response = response.result.value as? [String : AnyObject] else {
-                print("Failed here 2")
                 completion(nil)
                 return
             }
@@ -244,26 +216,19 @@ class NetworkingService {
             let genres = dict["genres"]?.arrayValue
             let firstGenreDict = genres?[0].dictionaryValue
             let firstGenre = firstGenreDict?["id"]?.intValue
-            print("Genres genres", firstGenre)
             
-            guard let firstGenreId = firstGenre else { print("Couldn't find first genreId"); completion(nil); return }
-            print("First genre id found", firstGenreId)
-   
+            guard let firstGenreId = firstGenre else { completion(nil); return }
             completion(firstGenreId)
-
-            
         }
         
     }
     
-    func getGenreTitle( completion: @escaping() -> Void) { // getting the genreTitle
+    private func getGenreTitle( completion: @escaping() -> Void) { // getting the genreTitle
 
         // genre api
-        let genre_apiURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(api_key)&language=en-US"
-        guard let url = URL(string: genre_apiURL) else { return }
+        guard let url = URL(string: genre_URL) else { return }
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
-            print("The response")
             if !response.result.isSuccess {
                 completion()
                 return
@@ -280,30 +245,7 @@ class NetworkingService {
                 self.genreNameIdPairs.updateValue(genreName, forKey: genreId)
                 print("Value Dict", valueDict)
             }
-            
-//            guard let genre_name = genreDict["name"]?.stringValue else {
-//                completion()
-//                return
-//            }
-//
             completion()
         }
-
-        
     }
-   
-    
-//    func justGetData(completion: () -> Void) {
-//        Alamofire.request("https://api.themoviedb.org/3/movie/now_playing?api_key=f2448e7d924f45f280a5db37ec9619b1").responseJSON { response in
-//            
-//            if response.result.isSuccess {
-//                let movieJSON = JSON(response.result.value!)
-//                print("VENUE JSON (from NetworkingService): \(movieJSON)")
-//            } else {
-//                print("No Response")
-//            }
-//           
-//        }
-//    }
-    
 }

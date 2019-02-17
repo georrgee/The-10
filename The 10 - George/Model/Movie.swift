@@ -31,14 +31,3 @@ struct Movie {
     }
 }
 
-//struct Genre {
-//
-//    let id:     String
-//    let name:   String
-//
-////    init(rawData: JSON) {
-////        id = rawData["id"].stringValue
-////        name = rawData["name"].stringValue
-////    }
-//}
-

@@ -1,4 +1,3 @@
-//
 //  NowPlayingTableViewCell.swift
 //  The 10 - George
 //
@@ -25,8 +24,8 @@ class NowPlayingTableViewCell: UITableViewCell {
             overViewLabel.text    = data?.overView
             
             if let id = data?.id {
-                print("the ID in dat", data?.id)
-                NetworkingService.shared.getMoviePoster(movieId: id, success: { [weak self] (url) in
+                //print("the ID in dat", data?.id)
+                NetworkingService.shared.getNowPlayingMoviePoster(movieId: id, success: { [weak self] (url) in
                     self?.posterImageView.download(url: url)
                 }) { (error) in
                     // if not set default image
@@ -57,8 +56,6 @@ class NowPlayingTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

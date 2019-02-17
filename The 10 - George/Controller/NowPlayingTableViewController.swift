@@ -31,19 +31,12 @@ class NowPlayingTableViewController: UITableViewController {
         }, failure: { error in
             // fail action
         })
-        
-//        NetworkingService.shared.getGenreId(movieId: "399579") { (data) in
-//            print("getGenreID called in NowPlayingTableViewController")
-//        }
-//
-//        NetworkingService.shared.getGenreTitle(genreId: "String") { (data) in
-//            print("getGenreTitle called in NowPlayingTableViewController")
-//        }
-
     }
+    
+ 
 
-    // MARK: - Table view data source
 
+    // MARK: - TableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -57,8 +50,12 @@ class NowPlayingTableViewController: UITableViewController {
         cell.data = dataSource[indexPath.row]
         return cell
     }
- 
-
-   
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let controller = NowPlayingDetailsViewController.createViewController()
+        controller.movie = dataSource[indexPath.row]
+        
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
