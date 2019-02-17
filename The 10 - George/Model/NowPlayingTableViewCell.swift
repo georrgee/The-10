@@ -42,6 +42,9 @@ class NowPlayingTableViewCell: UITableViewCell {
   
     
     func setupUI() {
+        posterImageView.layer.masksToBounds = true
+        posterImageView.layer.cornerRadius = 4
+        
         ratingLabel.layer.masksToBounds = true
         ratingLabel.layer.cornerRadius  = 5
     }

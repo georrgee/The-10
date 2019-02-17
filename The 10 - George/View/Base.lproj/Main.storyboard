@@ -35,6 +35,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="syN-RL-nDZ" kind="relationship" relationship="viewControllers" id="tRS-em-meY"/>
@@ -54,35 +56,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UpcomingTableViewCell" rowHeight="100" id="Hj8-DN-kCy">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UpcomingTableViewCell" rowHeight="100" id="Hj8-DN-kCy" customClass="UpcomingTableViewCell" customModule="The_10___George" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hj8-DN-kCy" id="ja8-Ti-jRA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NhF-Ba-5Eh">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NhF-Ba-5Eh">
                                             <rect key="frame" x="16" y="4" width="60" height="90"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="NhF-Ba-5Eh" secondAttribute="height" multiplier="2:3" id="EvS-gB-bIh"/>
+                                                <constraint firstAttribute="width" constant="60" id="h83-fx-qbr"/>
+                                                <constraint firstAttribute="height" constant="90" id="pB9-ag-igP"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cold Pursuit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eay-CF-DJe" userLabel="Movie Title Label">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cold Pursuit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eay-CF-DJe" userLabel="Movie Title Label">
                                             <rect key="frame" x="84" y="11" width="229" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="MzC-AT-fEo"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCT-Dg-0Pp" userLabel="Overview Label">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCT-Dg-0Pp" userLabel="Overview Label">
                                             <rect key="frame" x="84" y="53" width="274" height="41"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="41" id="9KO-hx-cp4"/>
+                                                <constraint firstAttribute="width" constant="274" id="iYs-L6-6N4"/>
+                                            </constraints>
                                             <string key="text">When Alita awakens with no memory of who she is in a future world she does not recognize, she is taken in by Ido, a compassionate doctor who realizes that somewhere in this abandoned cyborg shell is the heart and soul of a young woman with an extraordinary past.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5mV-y2-69S" userLabel="Genre Date Rating Stack View">
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5mV-y2-69S" userLabel="Genre Date Rating Stack View">
                                             <rect key="frame" x="84" y="36" width="182" height="13"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Science Fiction" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlC-pZ-z7f" userLabel="Genre Label">
                                                     <rect key="frame" x="0.0" y="0.0" width="76" height="13"/>
@@ -117,7 +127,29 @@
                                         </stackView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="NhF-Ba-5Eh" firstAttribute="leading" secondItem="ja8-Ti-jRA" secondAttribute="leading" constant="16" id="6ZH-cX-WNJ"/>
+                                        <constraint firstAttribute="trailing" secondItem="Eay-CF-DJe" secondAttribute="trailing" constant="62" id="6tq-Ew-f0v"/>
+                                        <constraint firstAttribute="trailing" secondItem="lCT-Dg-0Pp" secondAttribute="trailing" constant="17" id="A1o-eO-wmB"/>
+                                        <constraint firstItem="Eay-CF-DJe" firstAttribute="top" secondItem="ja8-Ti-jRA" secondAttribute="top" constant="11" id="COs-Wb-nU9"/>
+                                        <constraint firstItem="NhF-Ba-5Eh" firstAttribute="top" secondItem="ja8-Ti-jRA" secondAttribute="top" constant="4" id="UKG-26-o7d"/>
+                                        <constraint firstAttribute="bottom" secondItem="lCT-Dg-0Pp" secondAttribute="bottom" constant="5.5" id="VUf-oR-bCO"/>
+                                        <constraint firstAttribute="trailing" secondItem="5mV-y2-69S" secondAttribute="trailing" constant="109" id="cKS-wj-ElH"/>
+                                        <constraint firstItem="5mV-y2-69S" firstAttribute="leading" secondItem="NhF-Ba-5Eh" secondAttribute="trailing" constant="8" id="dwG-By-YYz"/>
+                                        <constraint firstItem="Eay-CF-DJe" firstAttribute="leading" secondItem="NhF-Ba-5Eh" secondAttribute="trailing" constant="8" id="gMR-wu-QGr"/>
+                                        <constraint firstItem="lCT-Dg-0Pp" firstAttribute="top" secondItem="5mV-y2-69S" secondAttribute="bottom" constant="4" id="hrs-0g-mAy"/>
+                                        <constraint firstItem="5mV-y2-69S" firstAttribute="top" secondItem="Eay-CF-DJe" secondAttribute="bottom" constant="4" id="p5M-Iw-WHZ"/>
+                                        <constraint firstItem="lCT-Dg-0Pp" firstAttribute="leading" secondItem="NhF-Ba-5Eh" secondAttribute="trailing" constant="8" id="zFe-fp-9w0"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="genreLabel" destination="hlC-pZ-z7f" id="OhU-xX-8jj"/>
+                                    <outlet property="movieTitleLabel" destination="Eay-CF-DJe" id="oUW-sr-9lc"/>
+                                    <outlet property="overViewLabel" destination="lCT-Dg-0Pp" id="pDe-Ko-TKQ"/>
+                                    <outlet property="posterImageView" destination="NhF-Ba-5Eh" id="JwO-Jq-dw8"/>
+                                    <outlet property="ratingLabel" destination="qrP-Np-JXO" id="bdI-vC-dx1"/>
+                                    <outlet property="releaseDateLabel" destination="h8A-qq-vMp" id="rcM-AB-T8C"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -125,7 +157,7 @@
                             <outlet property="delegate" destination="fhC-nB-Vmx" id="z3L-y7-VPn"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Upcoming" id="TfO-kA-Z8W"/>
+                    <tabBarItem key="tabBarItem" title="Upcoming" image="upcoming_icon" id="TfO-kA-Z8W"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Zc-NI-0lO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -152,6 +184,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Science Fiction" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzi-AO-01u" userLabel="Genre Label">
                                                     <rect key="frame" x="0.0" y="0.0" width="76" height="13"/>
+                                                    <color key="backgroundColor" red="0.50196078430000002" green="0.56862745100000001" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="76" id="zzZ-4i-81W"/>
                                                     </constraints>
@@ -239,11 +272,15 @@
                             <outlet property="delegate" destination="syN-RL-nDZ" id="9Bb-Th-Rqf"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Now Playing" id="3Ih-gX-mqK"/>
+                    <tabBarItem key="tabBarItem" title="Now Playing" image="popcorn_icon" id="3Ih-gX-mqK"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddz-7n-EEC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="397.60000000000002" y="-520.38980509745136"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="popcorn_icon" width="37.5" height="37.5"/>
+        <image name="upcoming_icon" width="40" height="40"/>
+    </resources>
 </document>

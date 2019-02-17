@@ -6,31 +6,49 @@
 import UIKit
 
 class UpcomingTableViewController: UITableViewController {
+    
+    var dataSource = [Movie]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getUpcomingMovieData()
+    }
+    
+    func getUpcomingMovieData() {
         
+        guard let upcomingURL = URL(string: upcoming_URL) else { return }
+        
+        NetworkingService.shared.getUpcomingMovies(with: upcomingURL, success: { (data) in
+            self.dataSource = data
+        }, failure: { error in
+            // fail action
+        })
+
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return dataSource.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UpcomingTableViewCell", for: indexPath) as! UpcomingTableViewCell
+        
+        cell.data = dataSource[indexPath.row]
+        
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.

@@ -17,8 +17,8 @@ class NetworkingService {
         getMovies(url: now_playingURL, success: success, failure: failure)
     }
 
-    func getUpcomingMovies(url: String, success: @escaping (_ movie: [Movie]) -> Void, failure: @escaping(_ error: Error) -> Void) {
-        getMovies(url: url, success: success, failure: failure)
+    func getUpcomingMovies(with url: URL, success: @escaping (_ movie: [Movie]) -> Void, failure: @escaping(_ error: Error) -> Void) {
+        getMovies(url: upcoming_URL, success: success, failure: failure)
     }
     
     init() {
