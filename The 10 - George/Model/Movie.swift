@@ -1,8 +1,9 @@
 //  Movie.swift
 //  The 10 - George
-
 //  Created by George Garcia on 2/14/19.
-//  Copyright © 2019 George Garcia. All rights reserved.
+//  Copyright © 2019 George Garcia. All rights reserved
+
+//  Description: a struct file where we can store the properties of a Movie!
 
 import Foundation
 import SwiftyJSON
@@ -17,9 +18,6 @@ struct Movie {
     let posterPath:     String
     let genreTitle:     String
     
-    //let videoPath: String?
-    //let backDrop: String?
-
     init(rawData: JSON) {
         id           = rawData["id"].stringValue
         title        = rawData["title"].stringValue
