@@ -15,7 +15,7 @@ protocol WalkthroughPageViewControllerDelegate: class {
 class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     // MARK: Properties
-    var pageHeadings = ["NOW PLAYING", "MOVIE DETAILS", "MOVIES COMING SOON"]
+    var pageHeadings = ["MOVIES NOW", "MOVIE DETAILS", "MOVIES COMING SOON"]
     var pageImages = ["now_playing_image", "now_playing_details_image", "upcoming_image"]
     var pageSubHeadings = ["Have the power to see movies that are now playing in theaters!", "Check out more details of a movie!", "Get ot know what movies are coming out in the future!"]
     var currentIndex = 0

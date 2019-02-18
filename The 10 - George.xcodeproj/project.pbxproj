@@ -105,7 +105,6 @@
 				366CE6FE22165AF000D405AA /* Controller */,
 				36230E432216700300143C8D /* Utilities */,
 				3668CF99221632AF00E0B65D /* Assets.xcassets */,
-				3668CF9B221632AF00E0B65D /* LaunchScreen.storyboard */,
 				3668CF9E221632AF00E0B65D /* Info.plist */,
 			);
 			path = "The 10 - George";
@@ -125,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				3668CF96221632AE00E0B65D /* Main.storyboard */,
+				3668CF9B221632AF00E0B65D /* LaunchScreen.storyboard */,
 				36504B382218E9DC0016CD36 /* Onboarding.storyboard */,
 			);
 			path = View;
