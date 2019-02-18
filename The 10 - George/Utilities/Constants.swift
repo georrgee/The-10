@@ -12,5 +12,3 @@ let now_playingURL  = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(
 let upcoming_URL    = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(api_key)&language=en-US&page=1"
 let genre_URL       = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(api_key)&language=en-US"
 let config_URL      = "https://api.themoviedb.org/3/configuration?api_key=\(api_key)"
-
-

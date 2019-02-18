@@ -61,6 +61,15 @@ class UpcomingDetailsViewController: UIViewController {
     
     private func setupNavigationBar(){
         navigationItem.largeTitleDisplayMode = .never
+        navigationItem.title = "Movie Details"
+        setupWatchNavigationButton()
+    }
+    
+    func setupWatchNavigationButton() {
+        let watchBarButton = UIBarButtonItem(title: "Watch", style: .plain, target: nil, action: nil)
+        //watchBarButton.tintColor = UIColor.white
+        watchBarButton.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: "Avenir-Light", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+        navigationItem.rightBarButtonItem = watchBarButton
     }
     
     static func createViewController() -> UpcomingDetailsViewController {

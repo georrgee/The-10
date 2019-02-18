@@ -8,5 +8,6 @@ target 'The 10 - George' do
   pod 'Alamofire'
   pod 'AlamofireImage'
   pod 'SwiftyJSON'
+  pod 'lottie-ios'
 
 end

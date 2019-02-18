@@ -21,6 +21,18 @@ class NowPlayingTableViewController: UITableViewController {
         getMovieData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        if let walktrhoughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+            present(walktrhoughViewController, animated: true, completion: nil)
+        }
+    }
+    
     func getMovieData(){
         
         // use the generics functon for both now playing and upcoming or anythign similar => change and handle errors, responses in 1 place
@@ -31,6 +43,12 @@ class NowPlayingTableViewController: UITableViewController {
         }, failure: { error in
             // fail action
         })
+        
+        // testing
+//        NetworkingService.shared.getReleaseDate(movieID: "438650", success: { (string) in
+//            print("blah, blah")
+//        })
+        
     }
     
  

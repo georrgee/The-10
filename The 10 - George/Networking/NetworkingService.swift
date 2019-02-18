@@ -46,7 +46,7 @@ class NetworkingService {
     }
     
     // MARK: Images - Getting them from TheMovieDB API
-    private func getImageBaseUrl(completion: @escaping (_ stringUrl: String?) -> Void) {
+    private func getImageBaseUrl(success: @escaping (_ stringUrl: String?) -> Void) {
         
         // getting the image base url from the "Configuration" MovieBaseDB API URL
         guard let url = URL(string: config_URL) else { return }
@@ -54,34 +54,34 @@ class NetworkingService {
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
             
             if !response.result.isSuccess {
-                completion(nil)
+                success(nil)
                 return
             }
             let rawData = JSON(response.result.value!)
             let imageDict = rawData["images"].dictionaryValue as [String: JSON]
             
             guard let base_url = imageDict["base_url"]?.stringValue else {
-                completion(nil)
+                success(nil)
                 return
             }
             
-            completion(base_url)
+            success(base_url)
         }
     }
     // Upcoming API URL getting Poster Path
-    private func getUpcomingPosterPath(movieId: String, completion: @escaping (_ posterPath: String?) -> Void) {
+    private func getUpcomingPosterPath(movieId: String, success: @escaping (_ posterPath: String?) -> Void) {
         
         guard let url = URL(string: upcoming_URL) else { return }
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
             
             if !response.result.isSuccess {   // if it's not successful, exit early in the function
-                completion(nil)
+                success(nil)
                 return                        // with a completion and a return statements
             }
             
             guard let response = response.result.value as? [String: AnyObject] else {
-                completion(nil)
+                success(nil)
                 return
             }
             
@@ -89,37 +89,37 @@ class NetworkingService {
             let dict = rawData.dictionaryValue
             
             guard let results = dict["results"]?.arrayValue else {
-                completion(nil)
+                success(nil)
                 return
             }
             
             guard let result = results.filter({
                 return $0["id"].stringValue == movieId
             }).first else {
-                completion(nil)
+                success(nil)
                 return
             }
 
             let posterPath = result["poster_path"].stringValue
             
-            completion(posterPath)
+            success(posterPath)
         }
     }
     
     // getting the poster path from the Movies Now_Playing API URL
-    private func getNowPlayingPosterPath(movieId: String, completion: @escaping (_ posterPath: String?) -> Void) {
+    private func getNowPlayingPosterPath(movieId: String, success: @escaping (_ posterPath: String?) -> Void) {
         
         guard let url = URL(string: now_playingURL) else { return }
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
             
             if !response.result.isSuccess {
-                completion(nil)
+                success(nil)
                 return
             }
             
             guard let response = response.result.value as? [String: AnyObject] else {
-                completion(nil)
+                success(nil)
                 return
             }
             
@@ -127,20 +127,20 @@ class NetworkingService {
             let dict = rawData.dictionaryValue
             
             guard let results = dict["results"]?.arrayValue else {
-                completion(nil)
+                success(nil)
                 return
             }
             
             guard let result = results.filter({
                 return $0["id"].stringValue == movieId
             }).first else {
-                completion(nil)
+                success(nil)
                 return
             }
             
             let posterPath = result["poster_path"].stringValue
             
-            completion(posterPath)
+             success(posterPath)
         }
     }
     
@@ -194,7 +194,7 @@ class NetworkingService {
         }
     }
     
-    private func getGenreId(movieId: String, completion: @escaping(_ genreId: Int?) -> Void) {
+    private func getGenreId(movieId: String, success: @escaping(_ genreId: Int?) -> Void) {
         
         // movie details API
         guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieId)?api_key=\(api_key)&language=en-US") else { return }
@@ -202,12 +202,12 @@ class NetworkingService {
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
 
             if !response.result.isSuccess {
-                completion(nil)
+                success(nil)
                 return
             }
             
             guard let response = response.result.value as? [String : AnyObject] else {
-                completion(nil)
+                success(nil)
                 return
             }
             
@@ -217,10 +217,53 @@ class NetworkingService {
             let firstGenreDict = genres?[0].dictionaryValue
             let firstGenre = firstGenreDict?["id"]?.intValue
             
-            guard let firstGenreId = firstGenre else { completion(nil); return }
-            completion(firstGenreId)
+            guard let firstGenreId = firstGenre else { success(nil); return }
+            success(firstGenreId)
         }
+    }
+    
+    func getReleaseDate(movieID: String, success: @escaping (_ date: String?) -> Void) {
         
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieID)/release_dates?api_key=\(api_key)") else { return }
+        
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
+            
+            if !response.result.isSuccess {
+                success(nil)
+                return
+            }
+            
+            guard let response = response.result.value as? [String : AnyObject] else {
+                success(nil)
+                return
+            }
+            
+            let rawData = JSON(response)
+            let results = rawData["results"].arrayValue
+            print("Reults Array Value: \(results)")
+            
+            
+//            for(key, value) in results.enumerated(){
+////                print("Key: \(key)")
+////                print("Value: \(value)")
+//                let dictionary = value.dictionaryValue
+//                let date = dictionary["release_dates"]?.arrayValue
+//
+//                print("Date 0: \(date?[0]["release_date"] as? String)")
+//
+//                print("Found Date: \(date)")
+//                //print("Dictionary in reults: \(dictionary)")
+//            }
+            
+//            for i in results {
+//                print("For loop in results: \(i)")
+//            }
+           // print("Results: \(results)")
+            
+            
+            //print("results dictionary: \(diction) ")
+            //print("Response Release Date: \(rawData)") //date.prefix(5) to get a certain part of string
+        }
     }
     
     private func getGenreTitle( completion: @escaping() -> Void) { // getting the genreTitle
@@ -236,14 +279,14 @@ class NetworkingService {
             
             let rawData = JSON(response.result.value!)
             let genreArray = rawData["genres"].arrayValue
-            print(" Genre Array", genreArray)
+            //print(" Genre Array", genreArray)
             for (key, value) in genreArray.enumerated() {
                 let valueDict = value.dictionaryValue
                 let id = valueDict["id"]?.intValue
                 let name = valueDict["name"]?.stringValue
                 guard let genreId = id, let genreName = name else { return }
                 self.genreNameIdPairs.updateValue(genreName, forKey: genreId)
-                print("Value Dict", valueDict)
+                //print("Value Dict", valueDict)
             }
             completion()
         }

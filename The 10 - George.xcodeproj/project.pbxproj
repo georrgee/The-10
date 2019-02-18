@@ -20,8 +20,12 @@
 		366CE70422165FE300D405AA /* NowPlayingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366CE70322165FE300D405AA /* NowPlayingTableViewCell.swift */; };
 		366CE70622165FF400D405AA /* UpcomingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366CE70522165FF400D405AA /* UpcomingTableViewCell.swift */; };
 		368B1D9722166E68009FA4FC /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368B1D9622166E68009FA4FC /* NetworkingService.swift */; };
+		36A409F4221A81EC00311488 /* movie_reel.json in Resources */ = {isa = PBXBuildFile; fileRef = 36A409F3221A81EC00311488 /* movie_reel.json */; };
 		36AB7C212219C74000CCB6A7 /* NowPlayingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB7C202219C74000CCB6A7 /* NowPlayingDetailsViewController.swift */; };
 		36AB7C232219E11300CCB6A7 /* UpcomingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB7C222219E11300CCB6A7 /* UpcomingDetailsViewController.swift */; };
+		36F697AD221A6D2500E67103 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F697AC221A6D2500E67103 /* WalkthroughContentViewController.swift */; };
+		36F697AF221A6EFA00E67103 /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F697AE221A6EFA00E67103 /* WalkthroughPageViewController.swift */; };
+		36F697B1221A72E300E67103 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F697B0221A72E300E67103 /* WalkthroughViewController.swift */; };
 		4396BE4FEBB0C455BB544868 /* Pods_The_10___George.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF45E0DF6AF65807D969FF9 /* Pods_The_10___George.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,8 +46,12 @@
 		366CE70322165FE300D405AA /* NowPlayingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingTableViewCell.swift; sourceTree = "<group>"; };
 		366CE70522165FF400D405AA /* UpcomingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTableViewCell.swift; sourceTree = "<group>"; };
 		368B1D9622166E68009FA4FC /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		36A409F3221A81EC00311488 /* movie_reel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_reel.json; sourceTree = "<group>"; };
 		36AB7C202219C74000CCB6A7 /* NowPlayingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingDetailsViewController.swift; sourceTree = "<group>"; };
 		36AB7C222219E11300CCB6A7 /* UpcomingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingDetailsViewController.swift; sourceTree = "<group>"; };
+		36F697AC221A6D2500E67103 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
+		36F697AE221A6EFA00E67103 /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
+		36F697B0221A72E300E67103 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		6726B49ED02FBE99C5463992 /* Pods-The 10 - George.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The 10 - George.release.xcconfig"; path = "Pods/Target Support Files/Pods-The 10 - George/Pods-The 10 - George.release.xcconfig"; sourceTree = "<group>"; };
 		DCF45E0DF6AF65807D969FF9 /* Pods_The_10___George.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_The_10___George.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -90,6 +98,7 @@
 		3668CF91221632AE00E0B65D /* The 10 - George */ = {
 			isa = PBXGroup;
 			children = (
+				36A409F0221A804B00311488 /* Animation */,
 				368B1D9522166E52009FA4FC /* Networking */,
 				366CE6FB22165AB300D405AA /* Model */,
 				366CE6FD22165AE500D405AA /* View */,
@@ -129,6 +138,9 @@
 				366CE70122165C8900D405AA /* UpcomingTableViewController.swift */,
 				36AB7C202219C74000CCB6A7 /* NowPlayingDetailsViewController.swift */,
 				36AB7C222219E11300CCB6A7 /* UpcomingDetailsViewController.swift */,
+				36F697AC221A6D2500E67103 /* WalkthroughContentViewController.swift */,
+				36F697AE221A6EFA00E67103 /* WalkthroughPageViewController.swift */,
+				36F697B0221A72E300E67103 /* WalkthroughViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -139,6 +151,14 @@
 				368B1D9622166E68009FA4FC /* NetworkingService.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		36A409F0221A804B00311488 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				36A409F3221A81EC00311488 /* movie_reel.json */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		D24A9226671D3E680C1E7C5C /* Pods */ = {
@@ -219,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3668CF9D221632AF00E0B65D /* LaunchScreen.storyboard in Resources */,
+				36A409F4221A81EC00311488 /* movie_reel.json in Resources */,
 				3668CF9A221632AF00E0B65D /* Assets.xcassets in Resources */,
 				3668CF98221632AE00E0B65D /* Main.storyboard in Resources */,
 				36504B392218E9DC0016CD36 /* Onboarding.storyboard in Resources */,
@@ -256,12 +277,14 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -280,10 +303,13 @@
 				36504B372217AE880016CD36 /* Extensions.swift in Sources */,
 				3668CF93221632AE00E0B65D /* AppDelegate.swift in Sources */,
 				366CE70622165FF400D405AA /* UpcomingTableViewCell.swift in Sources */,
+				36F697AF221A6EFA00E67103 /* WalkthroughPageViewController.swift in Sources */,
 				368B1D9722166E68009FA4FC /* NetworkingService.swift in Sources */,
 				36230E452216701B00143C8D /* Constants.swift in Sources */,
+				36F697B1221A72E300E67103 /* WalkthroughViewController.swift in Sources */,
 				366CE70022165C5200D405AA /* NowPlayingTableViewController.swift in Sources */,
 				36AB7C212219C74000CCB6A7 /* NowPlayingDetailsViewController.swift in Sources */,
+				36F697AD221A6D2500E67103 /* WalkthroughContentViewController.swift in Sources */,
 				36230E472216725B00143C8D /* Movie.swift in Sources */,
 				366CE70422165FE300D405AA /* NowPlayingTableViewCell.swift in Sources */,
 			);
