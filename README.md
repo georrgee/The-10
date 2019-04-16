@@ -1,5 +1,5 @@
 # The 10
-Simple movie app that shows users upcoming and current movies in theaters.
+A simple quick movie app that shows users upcoming and current movies in theaters.
 Used the Movie DB API in order to fetch data by using Alamofire and AlamofireImage to fetch movie posters
 
 ![the10intro](https://user-images.githubusercontent.com/15641201/56232267-3594fb00-6035-11e9-83cf-b036524de958.gif)
