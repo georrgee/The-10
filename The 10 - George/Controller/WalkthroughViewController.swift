@@ -1,5 +1,5 @@
 //  WalkthroughViewController.swift
-//  The 10 - George
+//  The 10
 //  Created by George Garcia on 2/17/19.
 //  Copyright © 2019 George Garcia. All rights reserved.
 
